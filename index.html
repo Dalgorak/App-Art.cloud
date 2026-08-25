@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App-Art.cloud – Handgemachte Apps</title>
+    <style>
+        :root {
+            --bg: #0f0f13;
+            --card: #1a1a24;
+            --card-hover: #22222f;
+            --accent: #6c5ce7;
+            --accent-hover: #7f71eb;
+            --text: #e8e8ed;
+            --text-dim: #8a8a9a;
+            --border: #2a2a38;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 720px;
+            width: 100%;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo span { color: var(--accent); }
+
+        .logo small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-dim);
+            letter-spacing: 0;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.05rem;
+        }
+
+        /* App Cards */
+        .apps { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            background: var(--card-hover);
+            border-color: var(--accent);
+        }
+
+        .card-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 16px;
+            background: var(--border);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            overflow: hidden;
+        }
+
+        .card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-body { flex: 1; min-width: 0; }
+
+        .card-body h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-body .meta {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-body p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        .card-action {
+            flex-shrink: 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 0.65rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .btn:active { transform: translateY(0); }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: var(--card-hover);
+            border-color: var(--accent);
+        }
+
+        /* Support Section */
+        .support {
+            margin-top: 3rem;
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--card);
+        }
+
+        .support h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .support p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .card-icon { margin: 0 auto; }
+            .card-action { width: 100%; }
+            .card-action .btn { width: 100%; justify-content: center; }
+            body { padding: 1.5rem 1rem; }
+            .logo { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <span>App-Art</span><small>.cloud</small>
+            </div>
+            <p class="subtitle">Handgemachte Apps – installieren, nutzen, unterstützen.</p>
+        </header>
+
+        <!-- App Cards -->
+        <div class="apps">
+
+            <!-- App 1: TT-Training -->
+            <div class="card">
+                <div class="card-icon">
+                    <img src="/assets/tt-training-icon.png" alt="TT-Training Icon" onerror="this.style.display='none';this.parentElement.textContent='🏓'">
+                </div>
+                <div class="card-body">
+                    <h2>TT-Training</h2>
+                    <div class="meta">v1.0 · 22. Aug 2026</div>
+                    <p>Dein Trainingstagebuch für Tischtennis. Technik, Übungen, Fortschritt – alles in einer App.</p>
+                </div>
+                <div class="card-action">
+                    <a href="/dl/tt-training.apk" class="btn">⬇ Installieren</a>
+                </div>
+            </div>
+
+            <!-- App 2: Perrys Angelbuch -->
+            <div class="card">
+                <div class="card-icon">
+                    <img src="/assets/angelbuch-icon.png" alt="Perrys Angelbuch Icon" onerror="this.style.display='none';this.parentElement.textContent='🎣'">
+                </div>
+                <div class="card-body">
+                    <h2>Perrys Angelbuch</h2>
+                    <div class="meta">v1.0 · Bald verfügbar</div>
+                    <p>Dein digitales Angelbuch – Fänge dokumentieren, Fotos machen, Spots speichern. Für Angler, die es genau wissen wollen.</p>
+                </div>
+                <div class="card-action">
+                    <a href="#" class="btn btn-secondary" onclick="return false;">⬇ Bald</a>
+                </div>
+            </div>
+
+            <!-- Weitere Apps kommen später hier rein -->
+
+        </div>
+
+        <!-- Support -->
+        <div class="support">
+            <h3>Unterstütze die Apps 💜</h3>
+            <p>Deine Unterstützung hilft, diese Apps weiterzuentwickeln und neue zu bauen.<br>Kommt bald.</p>
+            <a href="#" class="btn btn-secondary" onclick="return false;">💛 Unterstützen (folgt)</a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <a href="#">App-Art.cloud</a> · Made with 💜
+        </footer>
+
+    </div>
+</body>
+</html>
