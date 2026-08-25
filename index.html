@@ -14,6 +14,20 @@
             --text: #e8e8ed;
             --text-dim: #8a8a9a;
             --border: #2a2a38;
+            --btn-bg: #2a2a38;
+            --btn-hover: #3a3a48;
+        }
+        body.light {
+            --bg: #f5f3f0;
+            --card: #ffffff;
+            --card-hover: #faf8f5;
+            --accent: #6c5ce7;
+            --accent-hover: #5a4bd1;
+            --text: #1a1a24;
+            --text-dim: #6b6b7a;
+            --border: #e0ddd8;
+            --btn-bg: #e0ddd8;
+            --btn-hover: #d0cdc8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -62,6 +76,30 @@
         .subtitle {
             color: var(--text-dim);
             font-size: 1.05rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, border-color 0.2s;
+            z-index: 100;
+        }
+        .theme-toggle:hover {
+            background: var(--card-hover);
+            border-color: var(--accent);
         }
 
         /* App Cards */
@@ -215,6 +253,8 @@
             <p class="subtitle">Handgemachte Apps – installieren, nutzen, unterstützen.</p>
         </header>
 
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">☀️</button>
+
         <!-- App Cards -->
         <div class="apps">
 
@@ -265,5 +305,19 @@
         </footer>
 
     </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light');
+            const btn = document.getElementById('themeToggle');
+            btn.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
+            localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+        }
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light');
+            document.getElementById('themeToggle').textContent = '🌙';
+        }
+    </script>
 </body>
 </html>
