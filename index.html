@@ -3,135 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App-Art.cloud – Handgemachte Apps</title>
+    <title>App-Art.cloud</title>
+    <script>
+        try {
+            if (localStorage.getItem('theme') === 'light') {
+                document.documentElement.classList.add('light');
+            }
+        } catch (e) {}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0f0f13;
-            --card: #1a1a24;
-            --card-hover: #22222f;
-            --accent: #6c5ce7;
-            --accent-hover: #7f71eb;
-            --text: #e8e8ed;
-            --text-dim: #8a8a9a;
-            --border: #2a2a38;
-            --btn-bg: #2a2a38;
-            --btn-hover: #3a3a48;
+            --bg: #09090b;
+            --card: #12141a;
+            --text: #f5f5f4;
+            --muted: #a1a1aa;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.16);
+            --btn-bg: #f4f4f5;
+            --btn-text: #09090b;
+            --btn-hover: #e4e4e7;
+            --btn-disabled-text: #71717a;
+            --focus: #f5f5f4;
         }
-        body.light {
-            --bg: #f5f3f0;
+        html.light {
+            --bg: #f6f5f3;
             --card: #ffffff;
-            --card-hover: #faf8f5;
-            --accent: #6c5ce7;
-            --accent-hover: #5a4bd1;
-            --text: #1a1a24;
-            --text-dim: #6b6b7a;
-            --border: #e0ddd8;
-            --btn-bg: #e0ddd8;
-            --btn-hover: #d0cdc8;
+            --text: #18181b;
+            --muted: #71717a;
+            --border: #e7e5e4;
+            --border-strong: #d6d3d1;
+            --btn-bg: #18181b;
+            --btn-text: #fafafa;
+            --btn-hover: #27272a;
+            --btn-disabled-text: #a1a1aa;
+            --focus: #18181b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: "Instrument Sans", system-ui, sans-serif;
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        .page {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 3.5rem;
+        }
+
+        .top {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            padding: 2rem 1rem;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 2.75rem;
         }
 
-        .container {
-            max-width: 720px;
-            width: 100%;
-        }
-
-        /* Header */
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 0.5rem;
-        }
-
-        .logo span { color: var(--accent); }
-
-        .logo small {
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: var(--text-dim);
-            letter-spacing: 0;
-        }
-
-        .subtitle {
-            color: var(--text-dim);
+        .wordmark {
+            color: var(--text);
+            text-decoration: none;
             font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
         }
 
-        /* Theme Toggle */
+        .wordmark span {
+            color: var(--muted);
+            font-weight: 500;
+        }
+
         .theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
             border: 1px solid var(--border);
             background: var(--card);
             color: var(--text);
-            font-size: 1.2rem;
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.2s, border-color 0.2s;
-            z-index: 100;
-        }
-        .theme-toggle:hover {
-            background: var(--card-hover);
-            border-color: var(--accent);
         }
 
-        /* App Cards */
-        .apps { display: flex; flex-direction: column; gap: 1.5rem; }
+        .theme-toggle:hover { border-color: var(--border-strong); }
+
+        .lede {
+            color: var(--muted);
+            font-size: 1.05rem;
+            margin-bottom: 1.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .apps {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
 
         .card {
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
+            border-radius: 14px;
+            padding: 1.15rem 1.25rem;
             display: flex;
-            gap: 1.25rem;
             align-items: center;
-            transition: background 0.2s, border-color 0.2s;
+            gap: 1.15rem;
         }
 
-        .card:hover {
-            background: var(--card-hover);
-            border-color: var(--accent);
-        }
+        .card:hover { border-color: var(--border-strong); }
 
         .card-icon {
-            width: 72px;
-            height: 72px;
-            border-radius: 16px;
-            background: var(--border);
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: var(--bg);
+            border: 1px solid var(--border);
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
             overflow: hidden;
+            color: var(--muted);
         }
 
         .card-icon img {
@@ -142,234 +141,233 @@
 
         .card-body { flex: 1; min-width: 0; }
 
-        .card-body h2 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
+        .card-title {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.2rem;
         }
 
-        .card-body .meta {
+        .card-title h2 {
+            font-size: 1.02rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .meta {
             font-size: 0.8rem;
-            color: var(--text-dim);
-            margin-bottom: 0.5rem;
+            color: var(--muted);
+            white-space: nowrap;
         }
 
         .card-body p {
-            font-size: 0.9rem;
-            color: var(--text-dim);
-            line-height: 1.5;
+            font-size: 0.92rem;
+            color: var(--muted);
+            max-width: 52ch;
         }
 
         .card-action {
             flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.4rem;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            padding: 0.65rem 1.25rem;
-            font-size: 0.9rem;
+            justify-content: center;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 1px solid transparent;
+            border-radius: 9px;
+            padding: 0.55rem 1rem;
+            font: inherit;
+            font-size: 0.88rem;
             font-weight: 600;
+            letter-spacing: -0.01em;
             cursor: pointer;
             text-decoration: none;
-            transition: background 0.2s, transform 0.15s;
         }
 
-        .btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-        .btn:active { transform: translateY(0); }
+        .btn:hover { background: var(--btn-hover); }
 
         .btn-disabled,
-        .btn-disabled:hover,
-        .btn-disabled:active {
-            background: var(--btn-bg);
-            color: var(--text-dim);
+        .btn-disabled:hover {
+            background: transparent;
+            color: var(--btn-disabled-text);
+            border-color: var(--border);
             cursor: not-allowed;
             pointer-events: none;
-            transform: none;
-            opacity: 0.75;
         }
 
         .wip-note {
-            display: block;
-            margin-top: 0.45rem;
             font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-            color: var(--text-dim);
-            text-align: center;
+            color: var(--muted);
+            text-align: right;
         }
 
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text);
-        }
-
-        .btn-secondary:hover {
-            background: var(--card-hover);
-            border-color: var(--accent);
-        }
-
-        /* Support Section */
         .support {
-            margin-top: 3rem;
-            text-align: center;
-            padding: 2rem;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            background: var(--card);
+            margin-top: 2.75rem;
+            padding-top: 1.75rem;
+            border-top: 1px solid var(--border);
         }
 
-        .support h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+        .support h2 {
+            font-size: 1.02rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.35rem;
         }
 
         .support p {
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            margin-bottom: 1.25rem;
+            color: var(--muted);
+            font-size: 0.92rem;
+            margin-bottom: 1rem;
+            max-width: 52ch;
         }
 
-        /* Footer */
         footer {
-            margin-top: 3rem;
-            text-align: center;
-            color: var(--text-dim);
+            margin-top: 2.5rem;
+            color: var(--muted);
             font-size: 0.8rem;
         }
 
-        footer a {
-            color: var(--accent);
-            text-decoration: none;
+        :focus-visible {
+            outline: 2px solid var(--focus);
+            outline-offset: 3px;
         }
 
-        /* Responsive */
-        @media (max-width: 600px) {
-            .card {
-                flex-direction: column;
-                text-align: center;
-            }
-            .card-icon { margin: 0 auto; }
-            .card-action { width: 100%; }
-            .card-action .btn { width: 100%; justify-content: center; }
-            body { padding: 1.5rem 1rem; }
-            .logo { font-size: 1.6rem; }
+        @media (max-width: 640px) {
+            .page { padding: 1.5rem 1rem 2.5rem; }
+            .card { flex-wrap: wrap; align-items: flex-start; }
+            .card-title { flex-direction: column; gap: 0.1rem; }
+            .meta { white-space: normal; }
+            .card-action { flex: 1 1 100%; align-items: stretch; }
+            .wip-note { text-align: center; }
+            .card-action .btn { width: 100%; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-
-        <!-- Header -->
-        <header>
-            <div class="logo">
-                <span>App-Art</span><small>.cloud</small>
-            </div>
-            <p class="subtitle">Handgemachte Apps – installieren, nutzen, unterstützen.</p>
+    <div class="page">
+        <header class="top">
+            <a class="wordmark" href="/">App-Art<span>.cloud</span></a>
+            <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Helle Darstellung">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"></path>
+                </svg>
+            </button>
         </header>
 
-        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">☀️</button>
+        <p class="lede">Android-Apps zum direkten Installieren.</p>
 
-        <!-- App Cards -->
         <div class="apps">
-
-            <!-- App 1: TT-Training -->
-            <div class="card">
+            <article class="card">
                 <div class="card-icon">
-                    <img src="/assets/tt-training-icon.png" alt="TT-Training Icon" onerror="this.style.display='none';this.parentElement.textContent='🏓'">
+                    <img src="/assets/tt-training-icon.png" alt="">
                 </div>
                 <div class="card-body">
-                    <h2>TT-Training</h2>
-                    <div class="meta">v1.2.0 · 29. Sep 2026</div>
+                    <div class="card-title">
+                        <h2>TT-Training</h2>
+                        <div class="meta">v1.2.0 · 29. Sep 2026</div>
+                    </div>
                     <p>Dein Trainingstagebuch für Tischtennis. Technik, Übungen, Fortschritt – alles in einer App.</p>
                 </div>
                 <div class="card-action">
-                    <a href="https://github.com/Dalgorak/App-Art.cloud/releases/download/apks-v1/TT-Training-1.2.0.apk" class="btn" target="_blank">⬇ Installieren</a>
+                    <a href="https://github.com/Dalgorak/App-Art.cloud/releases/download/apks-v1/TT-Training-1.2.0.apk" class="btn" target="_blank" rel="noopener noreferrer">Installieren</a>
                 </div>
-            </div>
+            </article>
 
-            <!-- App 2: Fishing-Diary -->
-            <div class="card">
+            <article class="card">
                 <div class="card-icon">
-                    <img src="/assets/angelbuch-icon.png" alt="Fishing-Diary Icon" onerror="this.style.display='none';this.parentElement.textContent='🎣'">
+                    <img src="/assets/angelbuch-icon.png" alt="">
                 </div>
                 <div class="card-body">
-                    <h2>Fishing-Diary</h2>
-                    <div class="meta">v1.0.2 · 18. Sep 2026</div>
+                    <div class="card-title">
+                        <h2>Fishing-Diary</h2>
+                        <div class="meta">v1.0.2 · 18. Sep 2026</div>
+                    </div>
                     <p>Dein digitales Angelbuch – Fänge dokumentieren, Fotos machen, Spots speichern. Für Angler, die es genau wissen wollen.</p>
                 </div>
                 <div class="card-action">
-                    <a href="https://github.com/Dalgorak/App-Art.cloud/releases/download/apks-v1/Fishing-Diary-1.0.2.apk" class="btn" target="_blank">⬇ Installieren</a>
+                    <a href="https://github.com/Dalgorak/App-Art.cloud/releases/download/apks-v1/Fishing-Diary-1.0.2.apk" class="btn" target="_blank" rel="noopener noreferrer">Installieren</a>
                 </div>
-            </div>
+            </article>
 
-            <!-- App 3: TT-Stadtliga -->
-            <div class="card">
+            <article class="card">
                 <div class="card-icon">
-                    <img src="/assets/stadtliga-icon.png" alt="TT-Stadtliga Icon" onerror="this.style.display='none';this.parentElement.textContent='🏆'">
+                    <img src="/assets/stadtliga-icon.png" alt="">
                 </div>
                 <div class="card-body">
-                    <h2>TT-Stadtliga</h2>
-                    <div class="meta">v0.5.21 · 30. Sep 2026</div>
+                    <div class="card-title">
+                        <h2>TT-Stadtliga</h2>
+                        <div class="meta">v0.5.21 · 30. Sep 2026</div>
+                    </div>
                     <p>Deine Stadtliga – Ergebnisse, Tabellen, Spieltage. Immer den Überblick über deine Mannschaft.</p>
                 </div>
                 <div class="card-action">
-                    <a href="https://github.com/Dalgorak/App-Art.cloud/releases/download/apks-v1/TT-Stadtliga-0.5.21.apk" class="btn" target="_blank">⬇ Installieren</a>
+                    <a href="https://github.com/Dalgorak/App-Art.cloud/releases/download/apks-v1/TT-Stadtliga-0.5.21.apk" class="btn" target="_blank" rel="noopener noreferrer">Installieren</a>
                 </div>
-            </div>
+            </article>
 
-        </div>
-
-                    <!-- App 4: Spin-Check -->
-            <div class="card">
-                <div class="card-icon">
-                    🏓
+            <article class="card">
+                <div class="card-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75">
+                        <circle cx="12" cy="12" r="7"></circle>
+                        <path d="M12 5v14M8 8.5c1.2 1 2.5 1.5 4 1.5s2.8-.5 4-1.5M8 15.5c1.2-1 2.5-1.5 4-1.5s2.8.5 4 1.5" stroke-linecap="round"></path>
+                    </svg>
                 </div>
                 <div class="card-body">
-                    <h2>Spin-Check</h2>
-                    <div class="meta">v1.0.2 · 18. Sep 2026</div>
+                    <div class="card-title">
+                        <h2>Spin-Check</h2>
+                        <div class="meta">v1.0.2 · 18. Sep 2026</div>
+                    </div>
                     <p>Misst die Rotation eines Tischtennisballs – U/min, Topspin und Unterschnitt. Alles lokal, ohne Video zu speichern.</p>
                 </div>
                 <div class="card-action">
-                    <span class="btn btn-disabled" aria-disabled="true">⬇ Installieren</span>
-                    <span class="wip-note">Work in progress</span>
+                    <span class="btn btn-disabled" aria-disabled="true">Installieren</span>
+                    <span class="wip-note">Noch nicht verfügbar</span>
                 </div>
-            </div>
-
-        <!-- Support -->
-        <div class="support">
-            <h3>Unterstütze die Apps 🚀</h3>
-            <p>Deine Unterstützung hilft, diese Apps weiterzuentwickeln und neue zu bauen.</p>
-            <form action="https://www.paypal.com/donate" method="post" target="_top">
-                <input type="hidden" name="hosted_button_id" value="X8SX2BWWZ9CSG" />
-                <button type="submit" class="btn">Unterstützen</button>
-            </form>
+            </article>
         </div>
 
-        <!-- Footer -->
-        <footer>
-            <a href="#">App-Art.cloud</a> · Made with 🧠
-        </footer>
+        <section class="support">
+            <h2>Unterstützung</h2>
+            <p>Deine Unterstützung hilft, diese Apps weiterzuentwickeln und neue zu bauen.</p>
+            <form action="https://www.paypal.com/donate" method="post" target="_top">
+                <input type="hidden" name="hosted_button_id" value="X8SX2BWWZ9CSG">
+                <button type="submit" class="btn">Unterstützen</button>
+            </form>
+        </section>
 
+        <footer>App-Art.cloud</footer>
     </div>
 
     <script>
-        function toggleTheme() {
-            document.body.classList.toggle('light');
-            const btn = document.getElementById('themeToggle');
-            btn.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
-            localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+        const themeToggle = document.getElementById('themeToggle');
+        const sunIcon = themeToggle.innerHTML;
+        const moonIcon = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 7 7 0 0 0 20 14.5z"></path></svg>';
+
+        function applyTheme(light) {
+            document.documentElement.classList.toggle('light', light);
+            themeToggle.setAttribute('aria-pressed', light ? 'true' : 'false');
+            themeToggle.setAttribute('aria-label', light ? 'Dunkle Darstellung' : 'Helle Darstellung');
+            themeToggle.innerHTML = light ? moonIcon : sunIcon;
+            try {
+                localStorage.setItem('theme', light ? 'light' : 'dark');
+            } catch (e) {}
         }
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light');
-            document.getElementById('themeToggle').textContent = '🌙';
+
+        themeToggle.addEventListener('click', function () {
+            applyTheme(!document.documentElement.classList.contains('light'));
+        });
+
+        if (document.documentElement.classList.contains('light')) {
+            applyTheme(true);
         }
     </script>
 </body>
