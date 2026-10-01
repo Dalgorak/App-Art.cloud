@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum – App-Art.cloud</title>
+    <script>
+        try {
+            if (localStorage.getItem('theme') === 'light') {
+                document.documentElement.classList.add('light');
+            }
+        } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="/assets/legal.css">
+</head>
+<body>
+    <div class="page">
+        <header class="top">
+            <a class="wordmark" href="/">App-Art<span>.cloud</span></a>
+            <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Helle Darstellung">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"></path>
+                </svg>
+            </button>
+        </header>
+
+        <article class="legal">
+            <h1>Impressum</h1>
+
+            <h2>Angaben gemäß § 5 Digitale-Dienste-Gesetz</h2>
+            <address>
+                Christian Prescher<br>
+                Mühlenweg 1<br>
+                15232 Frankfurt (Oder)
+            </address>
+
+            <h2>Kontakt</h2>
+            <p>E-Mail: <a href="mailto:Christian-Prescher@outlook.de">Christian-Prescher@outlook.de</a></p>
+
+            <h2>Verantwortlich für den Inhalt</h2>
+            <p>Christian Prescher, Anschrift wie oben. Verantwortlich nach § 18 Abs. 2 Medienstaatsvertrag.</p>
+
+            <h2>Verbraucherstreitbeilegung</h2>
+            <p>Ich bin nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+        </article>
+
+        <footer>
+            <a href="/">App-Art.cloud</a>
+            <a href="/impressum.html">Impressum</a>
+            <a href="/datenschutz.html">Datenschutz</a>
+        </footer>
+    </div>
+    <script src="/assets/theme.js"></script>
+</body>
+</html>
