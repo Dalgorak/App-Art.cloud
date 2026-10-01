@@ -183,6 +183,27 @@
         .btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
         .btn:active { transform: translateY(0); }
 
+        .btn-disabled,
+        .btn-disabled:hover,
+        .btn-disabled:active {
+            background: var(--btn-bg);
+            color: var(--text-dim);
+            cursor: not-allowed;
+            pointer-events: none;
+            transform: none;
+            opacity: 0.75;
+        }
+
+        .wip-note {
+            display: block;
+            margin-top: 0.45rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--text-dim);
+            text-align: center;
+        }
+
         .btn-secondary {
             background: transparent;
             border: 1px solid var(--border);
@@ -316,7 +337,8 @@
                     <p>Misst die Rotation eines Tischtennisballs – U/min, Topspin und Unterschnitt. Alles lokal, ohne Video zu speichern.</p>
                 </div>
                 <div class="card-action">
-                    <a href="https://github.com/Dalgorak/App-Art.cloud/releases/download/apks-v1/Spin-Check-1.0.2.apk" class="btn" target="_blank">⬇ Installieren</a>
+                    <span class="btn btn-disabled" aria-disabled="true">⬇ Installieren</span>
+                    <span class="wip-note">Work in progress</span>
                 </div>
             </div>
 
