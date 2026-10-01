@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App-Art.cloud</title>
+    <title>App-Art.cloud – Handgemachte Apps</title>
     <script>
         try {
             if (localStorage.getItem('theme') === 'light') {
@@ -94,11 +94,23 @@
 
         .theme-toggle:hover { border-color: var(--border-strong); }
 
-        .lede {
-            color: var(--muted);
-            font-size: 1.05rem;
-            margin-bottom: 1.75rem;
-            letter-spacing: -0.01em;
+        .statement {
+            margin: 0.35rem 0 2.6rem;
+        }
+
+        .statement h1 {
+            font-size: clamp(2.15rem, 5vw, 3.35rem);
+            font-weight: 600;
+            letter-spacing: -0.045em;
+            line-height: 1.02;
+        }
+
+        .statement p {
+            margin-top: 0.7rem;
+            font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+            font-weight: 500;
+            letter-spacing: -0.03em;
+            line-height: 1.25;
         }
 
         .apps {
@@ -223,10 +235,13 @@
         }
 
         .support p {
-            color: var(--muted);
-            font-size: 0.92rem;
-            margin-bottom: 1rem;
-            max-width: 52ch;
+            color: var(--text);
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.35;
+            margin-bottom: 1.15rem;
+            max-width: 22em;
         }
 
         footer {
@@ -263,7 +278,10 @@
             </button>
         </header>
 
-        <p class="lede">Android-Apps zum direkten Installieren.</p>
+        <div class="statement">
+            <h1>Handgemachte Apps</h1>
+            <p>Installieren, nutzen, unterstützen.</p>
+        </div>
 
         <div class="apps">
             <article class="card">
@@ -315,11 +333,8 @@
             </article>
 
             <article class="card">
-                <div class="card-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75">
-                        <circle cx="12" cy="12" r="7"></circle>
-                        <path d="M12 5v14M8 8.5c1.2 1 2.5 1.5 4 1.5s2.8-.5 4-1.5M8 15.5c1.2-1 2.5-1.5 4-1.5s2.8.5 4 1.5" stroke-linecap="round"></path>
-                    </svg>
+                <div class="card-icon">
+                    <img src="/assets/spin-check-icon.png" alt="">
                 </div>
                 <div class="card-body">
                     <div class="card-title">
@@ -337,7 +352,7 @@
 
         <section class="support">
             <h2>Unterstützung</h2>
-            <p>Deine Unterstützung hilft, diese Apps weiterzuentwickeln und neue zu bauen.</p>
+            <p>Unterstützung von den Nutzern hilft mir, die Projekte zu realisieren.</p>
             <form action="https://www.paypal.com/donate" method="post" target="_top">
                 <input type="hidden" name="hosted_button_id" value="X8SX2BWWZ9CSG">
                 <button type="submit" class="btn">Unterstützen</button>
