@@ -447,18 +447,31 @@
             return n.toLocaleString('de-DE') + (n === 1 ? ' Download' : ' Downloads');
         }
 
-        fetch('https://api.github.com/repos/Dalgorak/App-Art.cloud/releases/tags/apks-v1', {
-            headers: { 'Accept': 'application/vnd.github+json' }
-        }).then(function (response) {
-            if (!response.ok) throw new Error('counts');
-            return response.json();
-        }).then(function (release) {
-            var assets = release.assets || [];
+        function loadJson(url) {
+            return fetch(url, { headers: { 'Accept': 'application/vnd.github+json' } }).then(function (response) {
+                if (!response.ok) throw new Error(url);
+                return response.json();
+            });
+        }
+
+        Promise.all([
+            loadJson('/assets/download-archive.json').catch(function () { return null; }),
+            loadJson('https://api.github.com/repos/Dalgorak/App-Art.cloud/releases/tags/apks-v1').catch(function () { return null; })
+        ]).then(function (results) {
+            var saved = results[0] && results[0].files;
+            var assets = results[1] && results[1].assets;
+            if (!saved && !assets) return;
+
+            var files = Object.assign({}, saved || {});
+            (assets || []).forEach(function (asset) {
+                files[asset.name] = Math.max(files[asset.name] || 0, asset.download_count || 0);
+            });
+
             var total = 0;
             document.querySelectorAll('[data-app]').forEach(function (card) {
                 var prefix = card.getAttribute('data-app');
-                var count = assets.reduce(function (sum, asset) {
-                    return asset.name.indexOf(prefix) === 0 ? sum + (asset.download_count || 0) : sum;
+                var count = Object.keys(files).reduce(function (sum, name) {
+                    return name.indexOf(prefix) === 0 ? sum + files[name] : sum;
                 }, 0);
                 total += count;
                 var el = card.querySelector('[data-count]');
@@ -471,7 +484,7 @@
             totalEl.appendChild(number);
             totalEl.appendChild(document.createTextNode(total === 1 ? ' Download insgesamt' : ' Downloads insgesamt'));
             totalEl.hidden = false;
-        }).catch(function () {});
+        });
     </script>
 </body>
 </html>
