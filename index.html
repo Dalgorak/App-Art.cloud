@@ -206,6 +206,24 @@
             gap: 0.4rem;
         }
 
+        .count {
+            font-size: 0.75rem;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .total {
+            margin: -1.35rem 0 1.75rem;
+            font-size: 0.95rem;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .total strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -290,6 +308,7 @@
             .card-title { flex-direction: column; gap: 0.1rem; }
             .meta { white-space: normal; }
             .card-action { flex: 1 1 100%; align-items: stretch; }
+            .count,
             .wip-note { text-align: center; }
             .card-action .btn { width: 100%; }
         }
@@ -312,8 +331,10 @@
             <p>Installieren, nutzen, unterstützen.</p>
         </div>
 
+        <p class="total" id="downloadTotal" hidden></p>
+
         <div class="apps">
-            <article class="card">
+            <article class="card" data-app="TT-Training">
                 <div class="card-icon">
                     <img src="/assets/tt-training-icon.png" alt="">
                 </div>
@@ -325,11 +346,12 @@
                     <p>Dein Trainingstagebuch für Tischtennis. Technik, Übungen, Fortschritt – alles in einer App.</p>
                 </div>
                 <div class="card-action">
+                    <span class="count" data-count hidden></span>
                     <a href="https://github.com/Dalgorak/App-Art.cloud/releases/download/apks-v1/TT-Training-1.2.0.apk" class="btn" target="_blank" rel="noopener noreferrer">Installieren</a>
                 </div>
             </article>
 
-            <article class="card">
+            <article class="card" data-app="Fishing-Diary">
                 <div class="card-icon">
                     <img src="/assets/angelbuch-icon.png" alt="">
                 </div>
@@ -341,11 +363,12 @@
                     <p>Dein digitales Angelbuch – Fänge dokumentieren, Fotos machen, Spots speichern. Für Angler, die es genau wissen wollen.</p>
                 </div>
                 <div class="card-action">
+                    <span class="count" data-count hidden></span>
                     <a href="https://github.com/Dalgorak/App-Art.cloud/releases/download/apks-v1/Fishing-Diary-1.0.2.apk" class="btn" target="_blank" rel="noopener noreferrer">Installieren</a>
                 </div>
             </article>
 
-            <article class="card">
+            <article class="card" data-app="TT-Stadtliga">
                 <div class="card-icon">
                     <img src="/assets/stadtliga-icon.png" alt="">
                 </div>
@@ -357,11 +380,12 @@
                     <p>Deine Stadtliga – Ergebnisse, Tabellen, Spieltage. Immer den Überblick über deine Mannschaft.</p>
                 </div>
                 <div class="card-action">
+                    <span class="count" data-count hidden></span>
                     <a href="https://github.com/Dalgorak/App-Art.cloud/releases/download/apks-v1/TT-Stadtliga-0.5.22.apk" class="btn" target="_blank" rel="noopener noreferrer">Installieren</a>
                 </div>
             </article>
 
-            <article class="card">
+            <article class="card" data-app="Spin-Check">
                 <div class="card-icon">
                     <img src="/assets/spin-check-icon.png" alt="">
                 </div>
@@ -373,6 +397,7 @@
                     <p>Misst die Rotation eines Tischtennisballs – U/min, Topspin und Unterschnitt. Alles lokal, ohne Video zu speichern.</p>
                 </div>
                 <div class="card-action">
+                    <span class="count" data-count hidden></span>
                     <span class="btn btn-disabled" aria-disabled="true">Installieren</span>
                     <span class="wip-note">Noch nicht verfügbar</span>
                 </div>
@@ -417,6 +442,36 @@
         if (document.documentElement.classList.contains('light')) {
             applyTheme(true);
         }
+
+        function formatCount(n) {
+            return n.toLocaleString('de-DE') + (n === 1 ? ' Download' : ' Downloads');
+        }
+
+        fetch('https://api.github.com/repos/Dalgorak/App-Art.cloud/releases/tags/apks-v1', {
+            headers: { 'Accept': 'application/vnd.github+json' }
+        }).then(function (response) {
+            if (!response.ok) throw new Error('counts');
+            return response.json();
+        }).then(function (release) {
+            var assets = release.assets || [];
+            var total = 0;
+            document.querySelectorAll('[data-app]').forEach(function (card) {
+                var prefix = card.getAttribute('data-app');
+                var count = assets.reduce(function (sum, asset) {
+                    return asset.name.indexOf(prefix) === 0 ? sum + (asset.download_count || 0) : sum;
+                }, 0);
+                total += count;
+                var el = card.querySelector('[data-count]');
+                el.textContent = formatCount(count);
+                el.hidden = false;
+            });
+            var totalEl = document.getElementById('downloadTotal');
+            var number = document.createElement('strong');
+            number.textContent = total.toLocaleString('de-DE');
+            totalEl.appendChild(number);
+            totalEl.appendChild(document.createTextNode(total === 1 ? ' Download insgesamt' : ' Downloads insgesamt'));
+            totalEl.hidden = false;
+        }).catch(function () {});
     </script>
 </body>
 </html>
